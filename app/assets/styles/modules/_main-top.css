@@ -1,0 +1,67 @@
+.main-top {
+  position: relative;
+
+  &__overlay {
+    display: block;
+    position: relative;
+    background-color: $mainBlue;
+    z-index: 2;
+  }
+
+  &__image {
+    display: block;
+    opacity: 0.5;
+    z-index: -1;
+  }
+
+  &__text-content {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  &__title {
+    font-family: Georgia, sans-serif;
+    font-weight: 300;
+    color: White;
+    font-size: 1.5rem;
+    margin: 0;
+
+    @mixin atSmall {
+      font-size: 2.25rem;
+    }
+
+    @mixin atMedium {
+      font-size: 3rem;
+    }
+
+    @mixin atLarge {
+      font-size: 4rem;
+    }
+  }
+
+  &__description {
+    font-weight: 150;
+    color: White;
+    font-size: 1rem;
+    margin: 0;
+
+    @mixin atSmall {
+      font-weight: 200;
+      font-size: 1.25rem;
+    }
+
+    @mixin atMedium {
+      font-weight: 250;
+      font-size: 1.5rem;
+    }
+
+    @mixin atLarge {
+      font-weight: 300;
+      font-size: 2rem;
+    }
+  }
+}

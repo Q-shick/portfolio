@@ -1,0 +1,36 @@
+.wrapper {
+  padding-left: 18px;
+  padding-right: 18px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+
+  &__title {
+    position: relative;
+    text-align: center;
+    margin: 0;
+    color: $darkGray;
+    font-family: Trebuchet MS, sans-serif;
+    font-size: 1.25rem;
+    font-weight: 100;
+
+    @mixin atMedium {
+      font-size: 2rem;
+    }
+
+    @mixin atLarge {
+      font-size: 3rem;
+    }
+  }
+
+  &__line {
+    border: none;
+    background-color: $darkBlue;
+    height: 3px;
+    width: 25%;
+
+    @mixin atMedium {
+      height: 5px;
+    }
+  }
+}

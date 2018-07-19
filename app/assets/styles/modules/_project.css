@@ -1,0 +1,27 @@
+.project {
+
+  &__photo {
+    border-radius: 40px;
+    overflow: hidden;
+    width: 160px;
+    height: 160px;
+    top: -60px;
+    margin: 0 auto -60px auto;
+    border: 5px solid $lightGray;
+    position: relative;
+  }
+
+  &__name {
+    color: $mainBlue;
+    text-align: center;
+    font-size: 1.25rem;
+    margin-bottom: 0;
+  }
+
+  &__keyword {
+    color: $beeYellow;
+    text-align: center;
+    font-size: 1rem;
+    transform: translateY(-50%);
+  }
+}

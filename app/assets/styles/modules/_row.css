@@ -1,0 +1,24 @@
+.row {
+  @mixin clearfix;
+
+  &--gutters {
+    margin-right: -40px;
+  }
+
+  &--gutters > div {
+    padding-right: 40px;
+  }
+
+  &__sub {
+    float: left;
+    width: 20%;
+
+    /* @mixin atSMall {
+      width: 33%
+    }
+
+    @mixin atMedium {
+      width: 20%
+    } */
+  }
+}
