@@ -606,6 +606,22 @@ img {
   }
   }
 
+.wrapper__line-t {
+    border: none;
+    background-color: #2f5572;
+    height: 3px;
+    width: 10%;
+    margin-top: 0.75rem;
+  }
+
+@media (min-width: 800px) {
+
+.wrapper__line-t {
+      height: 5px;
+      margin-top: 1.5rem
+  }
+  }
+
 .page-section {
   padding: 2rem 0;
 }
@@ -640,17 +656,8 @@ img {
     padding-right: 40px;
   }
 
-.row__sub {
-    float: left;
-    width: 20%;
+.row__item {
 
-    /* @mixin atSMall {
-      width: 33%
-    }
-
-    @mixin atMedium {
-      width: 20%
-    } */
   }
 
 .project__photo {
@@ -677,4 +684,35 @@ img {
     font-size: 1rem;
     -webkit-transform: translateY(-50%);
             transform: translateY(-50%);
+  }
+
+.project__content {
+    text-align: justify;
+    text-justify: inter-word;
+    font-size: 1rem;
+    width: 100%;
+  }
+
+.grid {
+  display: grid;
+  padding-top: 6rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  grid-template-columns: repeat(2, 1fr);
+  grid-row-gap: 6rem;
+}
+
+@media (min-width: 800px) {
+
+.grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-row-gap: 6rem
+}
+  }
+
+.grid__item {
+    -webkit-box-ordinal-group: 0;
+        -ms-flex-order: -1;
+            order: -1;
   }

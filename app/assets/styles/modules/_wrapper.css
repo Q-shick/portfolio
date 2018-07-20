@@ -33,4 +33,17 @@
       height: 5px;
     }
   }
+
+  &__line-t {
+    border: none;
+    background-color: $mainBlue;
+    height: 3px;
+    width: 10%;
+    margin-top: 0.75rem;
+
+    @mixin atMedium {
+      height: 5px;
+      margin-top: 1.5rem;
+    }
+  }
 }
