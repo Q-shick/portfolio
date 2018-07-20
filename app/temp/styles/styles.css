@@ -656,10 +656,6 @@ img {
     padding-right: 40px;
   }
 
-.row__item {
-
-  }
-
 .project__photo {
     border-radius: 40px;
     overflow: hidden;
@@ -686,7 +682,6 @@ img {
             transform: translateY(-50%);
   }
 
-<<<<<<< HEAD
 .project__content {
     text-align: justify;
     text-justify: inter-word;
@@ -716,7 +711,8 @@ img {
     -webkit-box-ordinal-group: 0;
         -ms-flex-order: -1;
             order: -1;
-=======
+  }
+
 .site-footer {
   background-color: #2f5572;
   color: White;
@@ -735,7 +731,7 @@ img {
 .site-footer__text {
       display: inline;
       padding-bottom: 0;
-      font-weight: 200
+      font-weight: 200;
+      margin-right: 1.25rem
   }
->>>>>>> footer
   }
