@@ -8,11 +8,13 @@
     display: block;
     padding-bottom: 1rem;
     font-weight: 100;
+    font-size: 0.75rem;
 
     @mixin atMedium {
       display: inline;
       padding-bottom: 0;
       font-weight: 200;
+      font-size: 1rem;
       margin-right: 1.25rem;
     }
   }
