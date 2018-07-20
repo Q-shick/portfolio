@@ -1,0 +1,49 @@
+.primary-nav {
+  text-align: center;
+  &__pull-right--medium {
+    @mixin atMedium {
+      float: right;
+    }
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+
+    @mixin clearfix;
+  }
+
+  li {
+    list-style: none;
+    float: left;
+    padding-right: 25px;
+  }
+
+  li:last-child {
+    margin-right: -25px;
+
+    @mixin atMedium {
+      margin-right: 0;
+    }
+  }
+
+  a {
+    display: block;
+    text-decoration: none;
+    color: White;
+    padding-top: 6px;
+    font-weight: 100;
+    font-size: 0.75rem;
+
+    @mixin atSmall {
+      padding-top: 8px;
+      font-size: 1rem;
+    }
+
+    @mixin atMedium {
+      padding-top: 16px;
+      font-weight: 300;
+    }
+  }
+}
