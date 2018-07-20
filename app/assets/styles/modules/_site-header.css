@@ -1,0 +1,42 @@
+.site-header {
+  position: absolute;
+  width: 100%;
+  height: 25px;
+  z-index: 2;
+  background-color: rgba($blueGreen, 0.45);
+
+  @mixin atSmall {
+    height: 33px;
+  }
+
+  @mixin atMedium {
+    height: auto;
+  }
+
+  &__btn-container {
+    display: none;
+
+    @mixin atMedium {
+      display: block;
+      float: right;
+
+      a {
+        display: block;
+        padding-top: 16px;
+        text-decoration: none;
+      }
+    }
+  }
+
+  &__btn-logo {
+    display: none;
+
+    @mixin atMedium {
+      display: block;
+      float: left;
+      padding: 0;
+      font-size: 1.45rem;
+      font-family: Bickham Script, Brush Script MT;
+    }
+  }
+}
