@@ -678,3 +678,25 @@ img {
     -webkit-transform: translateY(-50%);
             transform: translateY(-50%);
   }
+
+.site-footer {
+  background-color: #2f5572;
+  color: White;
+  padding: 0.5rem 0;
+  text-align: center;
+}
+
+.site-footer__text {
+    display: block;
+    padding-bottom: 1rem;
+    font-weight: 100;
+  }
+
+@media (min-width: 800px) {
+
+.site-footer__text {
+      display: inline;
+      padding-bottom: 0;
+      font-weight: 200
+  }
+  }
