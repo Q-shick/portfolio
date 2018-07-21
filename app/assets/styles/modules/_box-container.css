@@ -1,0 +1,98 @@
+.box-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: auto;
+  justify-content: space-evenly;
+
+  @mixin atMedium {
+    margin: auto 100px auto 100px;
+  }
+
+  &__title {
+    position: relative;
+    height: 45px;
+    font-weight: 400;
+    font-family: "Segoe UI", "Tahoma", "Gill Sans MT";
+    color: rgba($darkBlue, 0.65);
+    margin: 0;
+    max-width: 250px;
+    text-align: center;
+
+    a {
+      text-decoration: none;
+    }
+
+    a:visited {
+      color: $darkBlue;
+    }
+
+    a:hover {
+      color: $beeYellow;
+    }
+  }
+
+  &__box {
+    display: inline-block;
+    position: relative;
+    border-radius: 25px;
+    width: 250px;
+    height: 250px;
+    margin-bottom: 45px;
+    margin-right: 10px;
+    border: 3px solid $lightGray;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  &__box:last-child {
+    margin-right: -10px;
+  }
+
+  &__box:hover .box-container__img {
+    opacity: 0.5;
+    transform: scale(1.2);
+    transition: opacity 2s, transform 2s;
+  }
+
+  &__details {
+    position: absolute;
+    border-radius: 15px;
+    transform: scaleY(0);
+    transition: transform .5s;
+    top: 10px;
+    left: 10px;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgba($water, 0.8);
+  }
+
+  &__box:hover .box-container__details {
+    transform: scaleY(1);
+  }
+
+  &__content {
+    position: relative;
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+
+    h4 {
+      color: $beeYellow;
+      margin: 0;
+    }
+
+    p {
+      font-size: 0.9rem;
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    a {
+      position: relative;
+      top:35px;
+      text-align: center;
+      font-size: 0.8rem;
+    }
+  }
+}
