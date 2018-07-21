@@ -33,12 +33,16 @@
     text-decoration: none;
     color: White;
     padding-top: 6px;
-    font-weight: 100;
-    font-size: 0.75rem;
+    font-weight: 150;
+    font-size: 0.9rem;
+
+    &.is-current-link {
+      color: $beeYellow;
+    }
 
     @mixin atSmall {
       padding-top: 8px;
-      font-size: 1rem;
+      font-size: 1.25rem;
     }
 
     @mixin atMedium {
