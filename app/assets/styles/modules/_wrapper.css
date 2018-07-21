@@ -9,17 +9,16 @@
     position: relative;
     text-align: center;
     margin: 0;
+    font-size: 1.5rem;
+    font-weight: 300;
     color: $darkGray;
-    font-family: Trebuchet MS, sans-serif;
-    font-size: 1.25rem;
-    font-weight: 100;
 
     @mixin atMedium {
       font-size: 2rem;
     }
 
     @mixin atLarge {
-      font-size: 3rem;
+      font-size: 2.75rem;
     }
   }
 
@@ -34,10 +33,11 @@
     }
   }
 
-  &__line-t {
+  &__line-section {
     border: none;
     background-color: $mainBlue;
     height: 3px;
+    margin-bottom: 20px;
     width: 10%;
     margin-top: 0.75rem;
 
