@@ -9,7 +9,7 @@
 
   &__image {
     display: block;
-    opacity: 0.5;
+    opacity: 0.25;
   }
 
   &__text-content {
@@ -22,11 +22,11 @@
   }
 
   &__title {
-    font-family: Georgia, sans-serif;
-    font-weight: 300;
-    color: White;
-    font-size: 1.5rem;
     margin: 0;
+    font-family: "Georgia", serif;
+    font-weight: 300;
+    font-size: 1.5rem;
+    color: White;
 
     @mixin atSmall {
       font-size: 2.25rem;
@@ -42,10 +42,11 @@
   }
 
   &__description {
-    font-weight: 150;
-    color: White;
-    font-size: 1rem;
     margin: 0;
+    font-weight: 150;
+    font-size: 1rem;
+    color: White;
+
 
     @mixin atSmall {
       font-weight: 200;
