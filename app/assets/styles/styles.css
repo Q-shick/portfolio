@@ -6,9 +6,8 @@
 @import "modules/_btn";
 @import "modules/_wrapper";
 @import "modules/_page-section";
-@import "modules/_row";
-@import "modules/_project";
-@import "modules/_grid";
 @import "modules/_site-footer";
 @import "modules/_site-header";
 @import "modules/_primary-nav";
+@import "modules/_box-container";
+@import "modules/_paragraph";;
