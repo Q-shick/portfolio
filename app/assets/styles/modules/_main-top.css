@@ -23,7 +23,7 @@
 
   &__title {
     margin: 0;
-    font-family: "Georgia", serif;
+    font-family: "Lato", serif;
     font-weight: 300;
     font-size: 1.5rem;
     color: White;
@@ -43,6 +43,7 @@
 
   &__description {
     margin: 0;
+    font-family: "Lato", serif;
     font-weight: 150;
     font-size: 1rem;
     color: White;
