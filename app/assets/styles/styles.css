@@ -10,4 +10,5 @@
 @import "modules/_site-header";
 @import "modules/_primary-nav";
 @import "modules/_box-container";
-@import "modules/_paragraph";;
+@import "modules/_paragraph";
+@import "modules/_split";

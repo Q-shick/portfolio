@@ -1,9 +1,9 @@
 .wrapper {
-  padding-left: 18px;
-  padding-right: 18px;
+  padding-left: 30px;
+  padding-right: 30px;
   max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 10%;
+  margin-right: 10%;
 
   &__title {
     position: relative;
@@ -37,7 +37,6 @@
     border: none;
     background-color: $mainBlue;
     height: 3px;
-    margin-bottom: 20px;
     width: 10%;
     margin-top: 0.75rem;
 

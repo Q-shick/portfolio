@@ -1,0 +1,38 @@
+.split {
+  box-sizing: border-box;
+
+  &__column-2 {
+    float: left;
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    @mixin atMedium {
+      width: 50%;
+    }
+  }
+
+  &__column-3 {
+    float: left;
+    width: 100%;
+    padding-left: 30px;
+
+    @mixin atMedium {
+      width: 33.3%;
+    }
+  }
+
+  &__column-picture {
+    text-align: center;
+  }
+  /* display: flex;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  &__column {
+    flex: -50%;
+    @mixin atLarge {
+      flex: 50%;
+    }
+  } */
+}

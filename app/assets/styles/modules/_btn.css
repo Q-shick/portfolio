@@ -5,4 +5,10 @@
   color: White;
   text-decoration: none;
   padding: .75rem 1rem;
+
+  &__email {
+    border: none;
+    color: lightblue;
+    background: none;
+  }
 }
