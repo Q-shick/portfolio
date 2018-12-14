@@ -1,10 +1,10 @@
 .primary-nav {
   text-align: center;
-  &__pull-right--medium {
+  /* &__pull-right--medium {
     @mixin atMedium {
       float: right;
     }
-  }
+  } */
 
   ul {
     margin: 0;
@@ -17,15 +17,15 @@
   li {
     list-style: none;
     float: left;
-    padding-right: 25px;
+    padding-right: 20px;
   }
 
   li:last-child {
-    margin-right: -25px;
+    margin-right: -20px;
 
-    @mixin atMedium {
+    /* @mixin atMedium {
       margin-right: 0;
-    }
+    } */
   }
 
   a {
@@ -34,7 +34,7 @@
     color: White;
     padding-top: 6px;
     font-weight: 150;
-    font-size: 0.9rem;
+    font-size: 0.75rem;
 
     &.is-current-link {
       color: $beeYellow;
@@ -42,11 +42,12 @@
 
     @mixin atSmall {
       padding-top: 8px;
-      font-size: 1.25rem;
+      font-size: 1rem;
     }
 
     @mixin atMedium {
       padding-top: 16px;
+      font-size: 1.25rem;
       font-weight: 300;
     }
   }

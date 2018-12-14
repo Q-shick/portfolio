@@ -7,6 +7,10 @@
     padding-left: 15px;
     padding-right: 15px;
 
+    ul > li {
+      margin-bottom: 7px;
+    }
+
     @mixin atMedium {
       width: 50%;
     }
@@ -15,9 +19,10 @@
   &__column-3 {
     float: left;
     width: 100%;
-    padding-left: 30px;
+    padding-left: 0;
 
-    @mixin atMedium {
+    @mixin atSmall {
+      padding-left: 5%;
       width: 33.3%;
     }
   }

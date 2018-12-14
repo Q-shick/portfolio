@@ -1,9 +1,25 @@
 .paragraph {
-  font-size: 1.25rem;
+  padding-left: 5%;
+  padding-right: 5%;
+  font-size: 1.2rem;
   text-align: justify;
   margin-top: 3rem;
 
+  @mixin atMedium {
+    font-size: 1.3rem;
+  }
+
   @mixin atLarge {
     font-size: 1.5rem;
+  }
+
+  &__content {
+    li {
+      font-size: 1.2rem;
+
+      @mixin atMedium {
+        font-size: 1.25rem;
+      }
+    }
   }
 }

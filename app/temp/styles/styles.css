@@ -723,12 +723,11 @@ div {
   text-align: center;
 }
 
-@media (min-width: 800px) {
-
-.primary-nav__pull-right--medium {
-      float: right
-  }
-  }
+/* &__pull-right--medium {
+    @mixin atMedium {
+      float: right;
+    }
+  } */
 
 .primary-nav ul {
     margin: 0;
@@ -745,18 +744,15 @@ div {
 .primary-nav li {
     list-style: none;
     float: left;
-    padding-right: 25px;
+    padding-right: 20px;
   }
 
 .primary-nav li:last-child {
-    margin-right: -25px;
-  }
+    margin-right: -20px;
 
-@media (min-width: 800px) {
-
-.primary-nav li:last-child {
-      margin-right: 0
-  }
+    /* @mixin atMedium {
+      margin-right: 0;
+    } */
   }
 
 .primary-nav a {
@@ -765,7 +761,7 @@ div {
     color: White;
     padding-top: 6px;
     font-weight: 150;
-    font-size: 0.9rem;
+    font-size: 0.75rem;
   }
 
 .primary-nav a.is-current-link {
@@ -776,7 +772,7 @@ div {
 
 .primary-nav a {
       padding-top: 8px;
-      font-size: 1.25rem
+      font-size: 1rem
   }
   }
 
@@ -784,6 +780,7 @@ div {
 
 .primary-nav a {
       padding-top: 16px;
+      font-size: 1.25rem;
       font-weight: 300
   }
   }
@@ -919,16 +916,36 @@ div {
     }
 
 .paragraph {
-  font-size: 1.25rem;
+  padding-left: 5%;
+  padding-right: 5%;
+  font-size: 1.2rem;
   text-align: justify;
   margin-top: 3rem;
 }
+
+@media (min-width: 800px) {
+
+.paragraph {
+    font-size: 1.3rem
+}
+  }
 
 @media (min-width: 1200px) {
 
 .paragraph {
     font-size: 1.5rem
 }
+  }
+
+.paragraph__content li {
+      font-size: 1.2rem;
+    }
+
+@media (min-width: 800px) {
+
+.paragraph__content li {
+        font-size: 1.25rem
+    }
   }
 
 .split {
@@ -953,6 +970,10 @@ div {
     padding-right: 15px;
   }
 
+.split__column-2 ul > li {
+      margin-bottom: 7px;
+    }
+
 @media (min-width: 800px) {
 
 .split__column-2 {
@@ -963,12 +984,13 @@ div {
 .split__column-3 {
     float: left;
     width: 100%;
-    padding-left: 30px;
+    padding-left: 0;
   }
 
-@media (min-width: 800px) {
+@media (min-width: 530px) {
 
 .split__column-3 {
+      padding-left: 5%;
       width: 33.3%
   }
   }
