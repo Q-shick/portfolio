@@ -574,9 +574,17 @@ div {
   padding-left: 30px;
   padding-right: 30px;
   max-width: 1200px;
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 0%;
+  margin-right: 0%;
 }
+
+@media (min-width: 530px) {
+
+.wrapper {
+    margin-left: 10%;
+    margin-right: 10%
+}
+  }
 
 .wrapper__title {
     position: relative;
@@ -917,12 +925,22 @@ div {
     }
 
 .paragraph {
-  padding-left: 5%;
-  padding-right: 5%;
-  font-size: 1.2rem;
+  padding-left: 0%;
+  padding-right: 0%;
+  font-size: 1rem;
   text-align: justify;
-  margin-top: 3rem;
+  margin-top: 1.5rem;
 }
+
+@media (min-width: 530px) {
+
+.paragraph {
+    padding-left: 5%;
+    padding-right: 5%;
+    font-size: 1.2rem;
+    margin-top: 3rem
+}
+  }
 
 .paragraph h2, .paragraph h5 {
     text-align: center;
@@ -1032,7 +1050,7 @@ div {
 .split__column-3 {
     float: left;
     width: 100%;
-    padding-left: 0;
+    padding-left: 10%;
   }
 
 @media (min-width: 530px) {

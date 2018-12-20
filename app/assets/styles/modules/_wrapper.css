@@ -2,8 +2,13 @@
   padding-left: 30px;
   padding-right: 30px;
   max-width: 1200px;
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 0%;
+  margin-right: 0%;
+
+  @mixin atSmall {
+    margin-left: 10%;
+    margin-right: 10%;
+  }
 
   &__title {
     position: relative;

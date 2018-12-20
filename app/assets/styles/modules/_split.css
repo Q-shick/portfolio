@@ -19,7 +19,7 @@
   &__column-3 {
     float: left;
     width: 100%;
-    padding-left: 0;
+    padding-left: 10%;
 
     @mixin atSmall {
       padding-left: 5%;
