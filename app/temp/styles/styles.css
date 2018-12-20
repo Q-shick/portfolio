@@ -603,7 +603,8 @@ div {
 
 .wrapper__line {
     border: none;
-    background-color: #2b3856;
+    background-color: black;
+    opacity: 0.65;
     height: 3px;
     width: 25%;
   }
@@ -944,7 +945,7 @@ div {
 
 .paragraph a {
     text-decoration: none;
-    color: #2f5572;
+    color: #4863A0;
   }
 
 .paragraph a:hover {

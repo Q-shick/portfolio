@@ -24,7 +24,8 @@
 
   &__line {
     border: none;
-    background-color: $darkBlue;
+    background-color: black;
+    opacity: 0.65;
     height: 3px;
     width: 25%;
 
