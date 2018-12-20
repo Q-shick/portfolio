@@ -12,3 +12,5 @@
 @import "modules/_box-container";
 @import "modules/_paragraph";
 @import "modules/_split";
+@import "modules/_collapsible";
+@import "modules/_table";

@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>IBRD Loan Data</title>
+    <!-- <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> -->
+    <link rel="stylesheet" href="temp/styles/styles.css">
+    <!-- <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700' rel='stylesheet' type='text/css'>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div class="paragraph">
+        <h2>IBRD Loan Data Analysis and Predictive Model</h2>
+        <h5>By Kyoosik Kim on Dec 2018</h5>
+        <hr>
+        <p>The International Bank for Reconstruction and Development (<a href="https://www.worldbank.org/en/who-we-are/ibrd" target="_blank">IBRD</a>) is the world's largest development cooperative working with the World Bank to service middle or low-income countires. One of the main services is loans for the countries to carry out diverse projects such as construction, energy, road, or education. Historically there have been about 758K cases since the group was formed in 1947 for redevelopment after WWII. Most of these were disbursed and repaid, however, some of them were cancelled. The loan cancellation is a loan that was ready to begin but widthdrawn before disbursement. Considering the scale of loan amounts, cancellations would cause a tremendous waste of time as well as financial cost. For that reason, this project focused on analyzing cancelled loans and building a predictive model to prevent or prepare for such loans.</p>
+        <ol>
+          <li><a href="#dataset_preparation">Dataset Preparation</a>: Examine columns, handle null values</li>
+          <li><a href="#data_exploration">Data Exploration</a>: Basic statistics, histogram, scatter plot</li>
+          <li><a href="#Independent_variable">Independent Variable</a>: Study loan status, query data, select rows</li>
+          <li><a href="#data_clustering">Data Clustering</a>: Group projects by development type</li>
+          <li><a href="#feature_selection">Feature Selection</a>: Test features, finalize features</li>
+          <li><a href="#modeling">Modeling and Evaluation</a>: Balance classes, build machine learning models</li>
+        </ol>
+        <p>While there are officially 33 columns, the project took steps to filter important features and cases mostly in the first half. The data dictionary can be found at <a href="https://finances.worldbank.org/api/assets/6B259BEE-3B23-4BDF-B37C-0A8D36469060?download=true" target="_blank">World Bank Finance</a>, which could help to understand the overall dataset structure. In addition, the complete code is on the <a href="https://github.com/Q-shick/fundamentals_of_data_science/tree/master/final_project" target="_blank">Github</a> with the PowerPoint slides and the writing.</p>
+        <hr>
+
+        <br>
+        <h4 id="dataset_preparation">1. Dataset Preparation</h4>
+        <p>The dataset can be downloaded from <a href="https://finances.worldbank.org/Loans-and-Credits/IBRD-Statement-Of-Loans-Historical-Data/zucq-nrc3" target="_blank">World Bank</a> in CSV or <a href="https://dev.socrata.com/foundry/finances.worldbank.org/x433-52wt" target="_blank">Socrata</a> through API. I chose API for the project due to its capacity of fast querying. Since the goal is to analyze the modern trend, I ranged the years from 1980 to the present based on <em>loan closed date</em>. Then, the following libraries were called as Python was used for the project.</p>
+        <button class="collapsible">Python Libraries</button>
+        <div class="paragraph__code">
+          <script src="https://gist.github.com/Q-shick/39e4131ced8602f0b0c1ff242c8e78ac.js"></script>
+        </div>
+        <p>Along with API, <em>pickle</em> is very useful to store and access data. The following functions are to download the IBRD data via API with query and store it in pickle format. The query applied is years <em>after 1980</em> and loan status equal to either <em>repaid</em> or <em>cancelled</em>.</p>
+        <button class="collapsible">API and Pickle</button>
+        <div class="paragraph__code">
+          <script src="https://gist.github.com/Q-shick/5cc9a87eb2e9d766db17b9e38ebc0159.js"></script>
+        </div>
+        <p>The dataset became 326,674 cases with 18,138 cancelled loans and the rest being repaid loans. This imbalanced issue would be handled for modeling later. There are some columns containing null values, and they were handled differently as they came in diverse form.</p>
+        <ul>
+          <li>Drop: Difficult to fill or meaningless (id, names)</li>
+          <li>Fill: Distributed numbers</li>
+        </ul>
+        <p>First, each column was examined to see if it had no value or a single value. In this case, the entire column was simply dropped. Such columns were <em>due_3rd_party, sold_3rd_party,</em> and some more. Next, id columns such as <em>project_id</em> was dropped. The rest of columns had a small portion of null values, and they were examined to see if these null values were distributed over repaid loans and cancelled loans in the similar ratio. That is, there should be more null values in repaid class because repaid loans are much more.<br>After then, rows having null values were dropped in the order of column importance. Some columns had no longer null values after some rows were dropped based on other important columns. Unlike most of the columns, <em>interest_rate</em> was filled with its mean since the values are distributed over a certain range. The mean values were calculated by country due to the nature of the dataset. However, date related columns like <em>agreement_signing_date</em> possibly in digit had to be dropped since they went by individual loan.</p>
+        <button class="collapsible">Fill Interest Rates</button>
+        <div class="paragraph__code">
+          <script src="https://gist.github.com/Q-shick/d6e33e30f1578ee81fd91398ea26c108.js"></script>
+        </div>
+        <p>Before moving onto the next, I could extract useful information from date columns. One was how many days taken to sign the loan and the other was how many days taken for repayment. Fortunately, cancelled loans still had last day for repaying so the two columns were created in the code.</p>
+        <button class="collapsible">Days Columns</button>
+        <div class="paragraph__code">
+          <script src="https://gist.github.com/Q-shick/58b4e50b1098465dbca39c5e2937af99.js"></script>
+        </div>
+        <p></p>
+        <hr>
+
+        <br>
+        <h4 id="data_exploration">2. Data Exploration</h4>
+        <p>The average loan duration was 6.06 years from signing date to closing date. The statistics of the other numerical features were found as follows.</p>
+        <div class="table">
+          <table>
+            <tr>
+              <th>Feature</th>
+              <th>Mean</th>
+              <th>Std</th>
+              <th>Min</th>
+              <th>Median</th>
+              <th>Max</th>
+            </tr>
+            <tr>
+              <td>interest_rate (%)</td>
+              <td>5.98</td>
+              <td>2.80</td>
+              <td>0.00</td>
+              <td>6.18</td>
+              <td>12.00</td>
+            </tr>
+            <tr>
+              <td>original_principle_amount ($M)</td>
+              <td>62</td>
+              <td>111</td>
+              <td>0</td>
+              <td>29</td>
+              <td>3000</td>
+            </tr>
+            <tr>
+              <td>days_for_signing (Days)</td>
+              <td>116</td>
+              <td>279</td>
+              <td>0</td>
+              <td>38</td>
+              <td>3083</td>
+            </tr>
+            <tr>
+              <td>days_for_repayment (Days)</td>
+              <td>4304</td>
+              <td>1443</td>
+              <td>0</td>
+              <td>4202</td>
+              <td>8950</td>
+            </tr>
+          </table>
+        </div>
+        <p>Except for <em>interest_rate</em>, the rest of the numerical features were highly skewed. This was not surprising because there were so many small projects when only a few were huge in scale. These skewed distributions could be again confirmed with histogram.</p>
+        <img src="assets/images/numerical_distribution.png">
+        <p>As seen below, <em>original_principle_amount</em> and <em>days_for_signing</em> followed <a href="https://en.wikipedia.org/wiki/Power_law">Power Law</a> distribution. While <em>days_for_repayment</em> looked more of random, <em>interest_rate</em> could be bell shaped if zero interest loans were not considered. Transformation was not necessary because the goal was not regression of these variables. But looking at the correlation matrix of them was helpful to understand their relationships.</p>
+        <div class="table">
+          <table>
+            <th>Feature</th>
+            <th>interest_rate</th>
+            <th>original_principle_amount</th>
+            <th>days_for_signing</th>
+            <th>days_for_repayment</th>
+            <tr>
+              <td>interest_rate</td>
+              <td>1.00</td>
+              <td>-0.17</td>
+              <td>0.07</td>
+              <td>0.12</td>
+            </tr>
+            <tr>
+              <td>original_principle_amount</td>
+              <td>-0.17</td>
+              <td>1.00</td>
+              <td>-0.06</td>
+              <td>-0.06</td>
+            </tr>
+            <tr>
+              <td>days_for_signing</td>
+              <td>0.07</td>
+              <td>-0.06</td>
+              <td>1.00</td>
+              <td>0.04</td>
+            </tr>
+            <tr>
+              <td>days_for_repayment</td>
+              <td>0.12</td>
+              <td>-0.06</td>
+              <td>0.04</td>
+              <td>1.00</td>
+            </tr>
+          </table>
+        </div>
+        <p>There was a quite relationship between any two of them, which was good news because this meant they are Independent from each other. In other words, they would play their own role for the dependant variable without interfering with each other.</p>
+        <img src="assets/images/year_amount_scatter.png">
+        <p>The scatter plot above was drawn to see if there would be any time series issues as well as to see how the classes were distributed. It seemed like the number of loans were decreasing on the plot, but this was simply because the data was queried by closed date. Recalling the average loan duration, the recent loans have not been closed yet. <br>With that in mind, loans were distributed over two classes without any specific time patterns. In addition, I could spot the outliers in terms of loan amount to be seen on the upper side, none of which was a cancelled loan. I realized cancelled loans are not extremely huge in dollar amount, therefore, I removed the outliers.</p>
+        <div class="table">
+          <table>
+            <th>Feature</th>
+            <th>Unique</th>
+            <th>Top</th>
+            <th>Frequency</th>
+            <tr>
+              <td>borrower</td>
+              <td>713</td>
+              <td>Ministry of Finance</td>
+              <td>39100</td>
+            </tr>
+            <tr>
+              <td>country</td>
+              <td>109</td>
+              <td>Indonesia</td>
+              <td>29880</td>
+            </tr>
+            <tr>
+              <td>loan_type</td>
+              <td>8</td>
+              <td>Pool Loan</td>
+              <td>140768</td>
+            </tr>
+            <tr>
+              <td>project_name</td>
+              <td>2849</td>
+              <td>Education II</td>
+              <td>1796</td>
+            </tr>
+            <tr>
+              <td>region</td>
+              <td>6</td>
+              <td>Latin America and Caribbean</td>
+              <td>48158</td>
+            </tr>
+          </table>
+        </div>
+        <p>Categorical features also showed some skewness in that certain values were dominant in share. However, the real problem was that some of them had too many values over hundreds up to thousands. I would use country for analysis but would eventually drop before modeling because the project was to find trends in the pure sense of loans. The rest, <em>borrower</em> and <em>project_name</em>, would be processed by clustering the words contained in each of them, thus, they would need a further investigation.</p>
+        <hr>
+
+        <br>
+        <h4 id="Independent_variable">3. Independent Variable</h4>
+        <p>The target variable was the loan status either <em>repaid</em> or <em>cancelled</em>. As long as I could analyze the difference between the classes and build a predictive model, I wouldn't need to include all the observations. Therefore, this step focused on which data could be excluded so I could concentrate on the necessary data. As the data were heavily influenced by country, I invetigated them in that sense.</p>
+        <div class="table">
+          <table>
+            <th>Country</th>
+            <th>Total Amount ($B)</th>
+            <tr>
+              <td>Mexico</td>
+              <td>1610.01</td>
+            </tr>
+            <tr>
+              <td>Brazil</td>
+              <td>1609.47</td>
+            </tr>
+            <tr>
+              <td>Indonesia</td>
+              <td>1576.98</td>
+            </tr>
+            <tr>
+              <td>India</td>
+              <td>1257.13</td>
+            </tr>
+            <tr>
+              <td>Turkey</td>
+              <td>856.75</td>
+            </tr>
+          </table>
+
+        </div>
+        <p>The top three countries had huge amount of loans and it quickly dropped. Then, the question became what cancellation rates would be by country. To answer it, there were tens of countries that didn't cancel any loan such as Bahamas, Chad, Estonia, Ireland, Malawi, South Africa, Togo, and so on. However, these countries also didn't quite borrow that much having a small number of loans.</p>
+        <div class="table">
+          <table>
+            <th>Top 5 Repaying Countries</th>
+            <th>Repay Rate (%)</th>
+            <th>Top 5 Cancelling Countries</th>
+            <th>Cancel Rate (%)</th>
+            <tr>
+              <td>Turkey</td>
+              <td>99.5</td>
+              <td>Yugoslavia</td>
+              <td>66.7</td>
+            </tr>
+            <tr>
+              <td>Tunisia</td>
+              <td>99.4</td>
+              <td>Uzbekistan</td>
+              <td>53.8</td>
+            </tr>
+            <tr>
+              <td>Brazil</td>
+              <td>99.2</td>
+              <td>Sudan</td>
+              <td>50.0</td>
+            </tr>
+            <tr>
+              <td>South Korea</td>
+              <td>99.1</td>
+              <td>Sri Lanka</td>
+              <td>25.1</td>
+            </tr>
+            <tr>
+              <td>Malaysia</td>
+              <td>99.0</td>
+              <td>Dominica</td>
+              <td>24.3</td>
+            </tr>
+
+
+          </table>
+        </div>
+        <p>The chart was numbered with the countries that had at least one cancellation with the assumption that they had borrowed enough number of loans. They are all quite big countries, however, their economic situations were a lot different. The top five cancelling countries shed a light on which data I should focus on. Generally speaking, these countires were in serious economic troubles. Especially, <a href="https://en.wikipedia.org/wiki/Yugoslavia" target="_blank">Yugoslavia</a> folded in the 90s, giving an idea about the Soviet Union. With the hypothesis that countries would cancel loans when economy is bad, the following code extracted the years of loans cancelled by country.</p>
+        <button class="collapsible">Years of Loans Cancelled</button>
+        <div class="paragraph__code">
+          <script src="https://gist.github.com/Q-shick/6229c222bebfaf8ab3c1d629550908ca.js"></script>
+        </div>
+        <p>Number of loans by year from 1980 to the present was returned by the function in a list, which was plotted cumulatively as follows. Note that the years are based on closed date, resulting in some time lagging from the real economic situations.</p>
+        <img src="assets/images/cancelled_loans_top3.png">
+        <p>The top three countries had loans cancelled in specific years like the early 80s and in the 90s. The top three most loan cancelling countries showed a similar pattern.</p>
+        <img src="assets/images/cancelled_loans_bottom3.png">
+        <p>Sudan cancelled loans in the early 80s and the loans cancelled by Yugoslavia soared in the early 90s. I found it interesting that they cancelled loans in certain years and did not at all in the rest of years. To confirm the hypothesis about the relation between loan cancellations and economic recessions, I drew the plot for various countries over wide regions.</p>
+        <img src="assets/images/cancelled_loans_countries.png">
+        <p>As seen on the plot, there were substantial increases in the early 80s and the 90s in general. According to the research, there was a <a href="https://en.wikipedia.org/wiki/Early_1980s_recession">global recession</a> in the early 80s. The biggest event in the 90s should be <a href="https://en.wikipedia.org/wiki/Dissolution_of_the_Soviet_Union">the dissolution of the Soviet Union</a>, which undoubtedly had a great impact on the global economy.</p>
+        <button class="collapsible">Final Dataset</button>
+        <div class="paragraph__code">
+          <script src="https://gist.github.com/Q-shick/5809a249edf76f2471f046db104fb731.js"></script>
+        </div>
+        <p>The functions above would finalize the dataset. With the data reduced to 41,614 cases, I would selectively analyze the loans involved with economic recessions.</p>
+        <hr>
+
+        <br>
+        <h4 id="data_clustering">4. Data Clustering</h4>
+        <p>As found in Data Exploration, <em>borrower</em> and <em>project_name</em> were problematic in that there were too many different values. They would need to be categorized into countable groups to be qualified for category features. To get an idea how to group them, I took the first step by simply counting words.</p>
+        <img src="assets/images/borrower_barplot.png">
+        <p>Starting with <em>borrower</em>, Ministry of Finance was dominant accounting for about one third. However, I quickly found out that the rest were actually very similarly titled such as Department of Finance or Ministerio de Hacienda, just in different word or language. This indicated that there wouldn't be any meaningful difference however they could be grouped. For that reason, I decided not to use the feature.</p>
+        <img src="assets/images/project_barplot.png">
+        <p>Unlike <em>borrower</em>, there were dictinctive differences among values in <em>project_names</em>. I had to do some manual jobs to create a dictionary of 15 project sectors as keys and their variations as values. For example, project sector power could be expressed as 'pw', 'gas', or 'energy'. The following function would classify projects in the 15 groups.</p>
+        <button class="collapsible">Project Sector Clustering</button>
+        <div class="paragraph__code">
+          <script src="https://gist.github.com/Q-shick/ba1c90e5f8ef0e9eb308268c429f32bd.js"></script>
+        </div>
+        <p>And the categorical data became the three on the table.</p>
+        <div class="table">
+          <table>
+            <th>Feature</th>
+            <th>Unique</th>
+            <th>Top</th>
+            <th>Frequency</th>
+            <tr>
+              <td>loan_type</td>
+              <td>7</td>
+              <td>Pool Loan</td>
+              <td>17572</td>
+            </tr>
+            <tr>
+              <td>region</td>
+              <td>6</td>
+              <td>East Asia and Pacific</td>
+              <td>16752</td>
+            </tr>
+            <tr>
+              <td>proejct_sector</td>
+              <td>15</td>
+              <td>Other</td>
+              <td>13717</td>
+            </tr>
+          </table>
+        </div>
+        <p></p>
+        <hr>
+
+        <br>
+        <h4 id="feature_selection">5. Feature Selection</h4>
+        <p>There were remaining four of the numerical features and three of the categorical features so far. Even though useless features were filtered, the rest of them should still need investigation to see if they would be really useful for classification.</p>
+        <ul>
+          <li>Numerical: <em>interest_rate</em>, <em>original_principle_amount</em>, <em>days_for_signing</em>, <em>days_for_repayment</em></li>
+          <li>Categorical: <em>loan_type</em>, <em>region</em>, <em>project_name</em></li>
+        </ul>
+        <p>Since I found out the numerical features were not normal, I would use Mann-Whitney U test instead of T test. If the test result came as the distributions of repaid and cancelled loans are different, the feature would be useful to classify them.</p>
+        <img src="assets/images/mann_whitney.png">
+        <p>None of them had the same distribution for repaid and cancelled with almost zero P-value, which indicated that all of them could make contributions to classifying repaid or cancelled loans. Another interesting point was that there were a quite large number of zero interest or zero amount loans. <br>The interest rate in particular needed an additional attention because the average interest rate of cancelled loans was lower than repaid loans. This didn't make sense because it would be more reasonable to cancel loans with higher interest rates.</p>
+        <div class="table">
+          <table>
+            <th>interest_rate(%)</th>
+            <th>Repaid</th>
+            <th>Cancelled</th>
+            <tr>
+              <td>Mean</td>
+              <td>6.17</td>
+              <td>5.55</td>
+            </tr>
+            <tr>
+              <td>Mean (without 0%)</td>
+              <td>6.42</td>
+              <td>7.00</td>
+            </tr>
+            <tr>
+              <td>Median</td>
+              <td>6.90</td>
+              <td>6.93</td>
+            </tr>
+            <tr>
+              <td>Median (without 0%)</td>
+              <td>6.85</td>
+              <td>7.07</td>
+            </tr>
+          </table>
+        </div>
+        <p>Without the zero interest loans, both the mean and median of cancelled loans became significantly higher than repaid loans, which made more sense. In addition, the zero interest loans would probably be related with zero amount loans. Recalling that there were service related projects like education, not all the projects would entail monetary values.</p>
+        <div class="table">
+          <table>
+            <th>Feature/Median(days)</th>
+            <th>Repaid</th>
+            <th>Cancelled</th>
+            <tr>
+              <td>days_for_signing</td>
+              <td>36</td>
+              <td>45</td>
+            </tr>
+            <tr>
+              <td>days_for_repayment</td>
+              <td>5294</td>
+              <td>4564</td>
+            </tr>
+          </table>
+          <p>As for days related features, it took longer days for cancelled loans to be signed. This might mean that these loans already had such problems in the beginning that they needed more reviews even after the board approval. It was not surprising that the repayment duration of cancelled loans was longer than repaid loans, considering their average amount. <br>In summary, there were quite many zero interest and zero amount loans for some projects. Without them, borrowers usually cancelled high interest loans which probably had taken more attentions for finalizing. But large projects relatively survived economic recessions, suggesting that these projects were prioritized for long-term plans.</p>
+        </div>
+        <img src="assets/images/loan_type.png">
+        <p>I used bar plot for categorical data to compare classes. First off, there were 7 loan types available and some of them showed distinctive patterns. Although 'B-loan' and 'FSL' accounted for a small number, they would help to recognize cancelled loans because all of them were cancelled. They are related with cofinancing and spread, respectively, which could expose loans to variabilities whenever external factors become instable.</p>
+        <img src="assets/images/region.png">
+        <p>African countries borrowed relatively less loans, but the cancellation rate was much higher. Countries in Europe and Central Asia also showed a high cancellation rate, and this should be related to the Soviet Union since these countries were the members. On the contrary, countries in East Asia and Pacific mostly executed their loans. The rest appeared to be quite similar in cancellation.</p>
+        <div class="table">
+          <table>
+            <th>Country</th>
+            <th>Cancelled(%)</th>
+            <th>Country</th>
+            <th>Cancelled(%)</th>
+            <th>Country</th>
+            <th>Cancelled(%)</th>
+            <tr>
+              <td>Rehab</td>
+              <td>58.5</td>
+              <td>Finance</td>
+              <td>49.8</td>
+              <td>Emergency</td>
+              <td>48.0</td>
+            </tr>
+            <tr>
+              <td>Agriculture</td>
+              <td>37.3</td>
+              <td>Education</td>
+              <td>33.7</td>
+              <td>Water</td>
+              <td>32.9</td>
+            </tr>
+            <tr>
+              <td>Construction</td>
+              <td>31.3</td>
+              <td>Industry</td>
+              <td>28.6</td>
+              <td>Road</td>
+              <td>22.4</td>
+            </tr>
+            <tr>
+              <td>Other</td>
+              <td>16.7</td>
+              <td>Power</td>
+              <td>14.3</td>
+              <td>Environment</td>
+              <td>8.8</td>
+            </tr>
+            <tr>
+              <td>Transport</td>
+              <td>8.6</td>
+              <td>City</td>
+              <td>8.4</td>
+              <td>Health</td>
+              <td>6.4
+
+              </td>
+            </tr>
+          </table>
+
+        </div>
+        <p>The 15 sectors grouped by the earlier processing were widely ranged. While 'Rehab' projects were cancelled more than half the cases, 'Health' projects mostly continued. Between the two, the rest seemed like they had their own cancellation rates, thus, the clustering was reasonable. <br>Since all the numerical and categorical features appeared to have a power to classify the loans, I decided to keep all of them at this point. Depending on model performances, some of them could be dropped though.</p>
+        <hr>
+
+        <br>
+        <h4 id="modeling">6. Modeling and Evaluation</h4>
+        <p>Previously, I found out the imbalanced class issue, having much more number of repaid loans. This could cause a bias when modeling that it would always predict <em>repaid</em>. In order for a model to have a balanced power of prediction, the classes should be equally or similarly given to the training set. This process should be done to the validation set too.</p>
+        <button class="collapsible">Balancing Training/Validation Set</button>
+        <div class="paragraph__code">
+          <script src="https://gist.github.com/Q-shick/1913772f7ba4449a62326562665138a5.js"></script>
+        </div>
+        <p>Out of the total 41,614 cases, the training set was sized 14,074 with 7,037 repaid loans and the same for cancelled loans. In other words, it had to drop a lot of repaid loans to base the size on cancelled loans. The validation set sized 3,520 was split in half for the two classes too. With the number of each class set equally, I chose Gaussian Naive Bayes as the baseline model.</p>
+        <div class="table">
+          <table>
+            <th>Naive Beyes</th>
+            <th>Predicted Repaid</th>
+            <th>Predicted Cancelled</th>
+            <tr>
+              <td>True Repaid</td>
+              <td>338</td>
+              <td>1422</td>
+            </tr>
+            <tr>
+              <td>True Cancelled</td>
+              <td>217</td>
+              <td>1543</td>
+            </tr>
+          </table>
+
+        </div>
+        <p>The baseline model didn't do a good job with cross validation accuracy 0.54 (+/-0.01). Especially, it failed to recognize repaid loans correctly resulting in 0.47 for f1-score. When there could be many reasons for this poor performance, the assumption of Naive Bayes model must have not been met that variables are Independent each other. However, the performance was improved remarkably with other models.</p>
+        <div class="table">
+          <table>
+            <th>Decision Tree</th>
+            <th>Predicted Repaid</th>
+            <th>Predicted Cancelled</th>
+            <tr>
+              <td>True Repaid</td>
+              <td>1757</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td>True Cancelled</td>
+              <td>0</td>
+              <td>1760</td>
+            </tr>
+          </table>
+
+        </div>
+        <p>Decision Tree only failed 3 cases having almost maximum accuracy and f1-score. SVC also performed very well not even misclassifying any of them. An interesting point was Gradient Boosting didn't do better than Decision Tree.</p>
+        <div class="table">
+          <table>
+            <th>Gradient Boosting</th>
+            <th>Predicted Repaid</th>
+            <th>Predicted Cancelled</th>
+            <tr>
+              <td>True Repaid</td>
+              <td>1643</td>
+              <td>117</td>
+            </tr>
+            <tr>
+              <td>True Cancelled</td>
+              <td>46</td>
+              <td>1714
+
+              </td>
+            </tr>
+          </table>
+
+        </div>
+        <p>Its accuracy was 0.96 (+/-0.02) and f1-score was 0.95. This was still impressive, but still worse than Decision Tree. Interestingly enough, Gradient Boosting is considered as a more complicated model than Decision Tree. That is, a sophisticated model isn't always better. Even if Gradient Boosting worked the same, I would have to choose Decision Tree according to Occam's Razor.</p>
+        <img src="assets/images/dt_importance.png">
+        <p>Selecting Decision Tree as the final model, the feature importance plot above was helpful to understand which feature made how much contributions. As it turned out, <em>interest rate</em> was the biggest impact followed by <em>loan_type</em>. In fact, the two explained the most of the model, so I tried building another Decision Tree model only with them. <br>The performance with two major features was still good enough with 0.89 (+/-0.01) accuracy and 0.88 f1-score. However, the difference between the full model and the partial model was what made it perfect or not. Therefore, discovering and processing the rest of 5 features was meaningful for perfection.</p>
+        <hr>
+
+        <br>
+        <h4>Conclusion</h4>
+        <p></p>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="wrapper">
+        <p><span class="site-footer__text">Copyright &copy; Kyoosik Kim 2018 All rights reserved.</span></p>
+      </div>
+    </footer>
+    <script src="/temp/scripts/App.js"></script>
+  </body>
+</html>

@@ -923,6 +923,60 @@ div {
   margin-top: 3rem;
 }
 
+.paragraph h2, .paragraph h5 {
+    text-align: center;
+  }
+
+.paragraph hr {
+    border: 1px solid lightGray;
+  }
+
+.paragraph p {
+    font-size: 1rem;
+  }
+
+@media (min-width: 800px) {
+
+.paragraph p {
+      font-size: 1.25rem
+  }
+  }
+
+.paragraph a {
+    text-decoration: none;
+    color: #2f5572;
+  }
+
+.paragraph a:hover {
+    color: lightblue;
+  }
+
+.paragraph ol, .paragraph ul > * {
+    font-size: 1rem;
+    line-height: 130%;
+    text-align: left;
+  }
+
+@media (min-width: 800px) {
+
+.paragraph ol, .paragraph ul > * {
+      font-size: 1.25rem
+  }
+  }
+
+.paragraph li > a {
+    font-weight: 600;
+  }
+
+.paragraph p > br {
+    line-height: 180%;
+  }
+
+.paragraph img {
+    display: block;
+    margin: auto;
+  }
+
 @media (min-width: 800px) {
 
 .paragraph {
@@ -937,15 +991,8 @@ div {
 }
   }
 
-.paragraph__content li {
-      font-size: 1.2rem;
-    }
-
-@media (min-width: 800px) {
-
-.paragraph__content li {
-        font-size: 1.25rem
-    }
+.paragraph__code {
+    display: none;
   }
 
 .split {
@@ -997,4 +1044,56 @@ div {
 
 .split__column-picture {
     text-align: center;
+  }
+
+.collapsible {
+  border-radius: 10px;
+  background-color: #d3d3d3;
+  cursor: pointer;
+  padding: 1rem;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #2f5572;
+}
+
+.collapsible:hover {
+  background-color: gray;
+  color: white;
+}
+
+.table {
+  overflow: auto;
+  font-size: 1rem;
+}
+
+@media (min-width: 800px) {
+
+.table {
+    font-size: inherit
+}
+  }
+
+.table table {
+    width: 80%;
+    border-collapse: collapse;
+    font-size: 1rem;
+    margin: 0px auto;
+  }
+
+.table td, .table th {
+    border: 1px solid;
+    text-align: center;
+    padding: 8px;
+  }
+
+.table tr:nth-child(even) {
+    background-color: lightGray;
+  }
+
+.table tr:hover {
+    background-color: lightblue;
   }
