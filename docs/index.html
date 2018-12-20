@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700' rel='stylesheet' type='text/css'>
+  <title>Kyoosik Kim</title>
+  <meta name="keywords" content="Data Science, Machine Learning, Project Portfolio">
+  <meta name="description" content="About Kyoosik Kim and his data science projects">
+
+  <link rel="stylesheet" href="temp/styles/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="wrapper">
+      <!--navigation-->
+      <div class="site-header__nav">
+        <nav class="primary-nav primary-nav__pull-right--medium">
+          <ul>
+            <li><a href="#Project" id="portfolio-link">PROJECT</a></li>
+            <li><a href="#SkillSet" id="skillSet-link">SKILL SET</a></li>
+            <li><a href="#Experience" id="experience-link">EXPERIENCE</a></li>
+            <li><a href="#Contact" id="contact-link">CONTACT</a></li>
+          </ul>
+        </nav>
+      </div>
+      <!--menu X button-->
+      <div class="site-header__menu-icon"></div>
+    </div>
+  </header>
+
+  <!--main banner-->
+  <div class="main-top">
+    <!--background image-->
+    <div class="main-top__overlay">
+      <picture>
+        <source srcset="assets/images/seoul-night--large.jpg 1920w, assets/images/seoul-night-hi-dpi--large.jpg 2880w" media="(min-width: 990px)">
+        <source srcset="assets/images/seoul-night--medium.jpg 990w, assets/images/seoul-night-hi-dpi--medium.jpg 1920w" media="(min-width: 640px)">
+        <img srcset="assets/images/seoul-night--small.jpg 640w, assets/images/seoul-night-hi-dpi--small 990w" alt="Night view in Seoul city" class="main-top__image">
+      </picture>
+      <!--main title (name & portrait)-->
+      <div class="main-top__text-content">
+        <div class="wrapper">
+          <br/>
+          <h1 class="main-top__title">KYOOSIK KIM</h1>
+          <hr class="wrapper__line">
+          <p class="main-top__description">Data Science - Machine Learning</p>
+          <br/>
+          <a href="https://github.com/Q-shick" target="_blank" style="color:black;text-decoration:none;">
+            <i class="fa fa-github-square" style="font-size:2.75rem;opacity:0.65"></i>&nbsp
+          </a>
+          <a href="https://www.linkedin.com/in/kyoosik-kim-080b17126/" target="_blank" style="color:black;text-decoration:none;">
+            &nbsp<i class="fa fa-linkedin-square" style="font-size:2.75rem;opacity:0.65"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--project thumbnails-->
+  <div id="Project" class="page-section" data-matching-link="#portfolio-link">
+    <div class="wrapper">
+      <h2 class="wrapper__title">PROJECT</h2>
+      <hr class="wrapper__line-section">
+      <div class="paragraph">
+        The following projects are displayed in the order of <em>newest to oldest</em>. I recommend seeing the recent projects as they best represent the skills I have now. However, browsing my early works could help you understand how quickly I learned data science techniques. All the projects including the following can be found on my <a href="https://github.com/Q-shick">Github</a>.
+      </div>
+      <div class="box-container">
+        <!--project 1-->
+        <div class="box-container__package">
+          <div class="box-container__title">
+            <P><a href="proj_ibrd_loan.html" target="_blank">IBRD Loan</a></P>
+          </div>
+          <div class="box-container__box">
+            <img class="box-container__img" src="assets/images/cover_ibrd.png" alt="NYC MTA">
+            <div class="box-container__content">
+              <h4>Dec 2018</h4>
+              <p>Accessed IBRD loan data via API to analyze and build a preditive model by examining features for classification of loan cancellation</p>
+              <a href="proj_ibrd_loan.html" target="_blank" class="btn">See Details</a>
+            </div>
+          </div>
+        </div>
+        <!--project 2-->
+        <!-- <div class="box-container__package">
+          <div class="box-container__title">
+            <P><a href="proj_farmers_market.html" target="_blank">HMDA Mortgage</a></P>
+          </div>
+          <div class="box-container__box">
+            <img class="box-container__img" src="assets/images/farmers_market_heart_mortality.png" alt="">
+            <div class="box-container__content">
+              <h4>Dec 2018</h4>
+              <p>Analyzed two different public datasets "Farmer's Market" and "Heart Disease Mortality", trying to find their relationships by fundamental methods such as histogram, scatter plot, correlation.</p>
+              <a href="proj_farmers_market.html" target="_blank" class="btn">See Details</a>
+            </div>
+          </div>
+        </div> -->
+        <!--project 3-->
+        <div class="box-container__package">
+          <div class="box-container__title">
+            <P><a href="proj_dc_house_price.html" target="_blank">Washington D.C. House Price</a></P>
+          </div>
+          <div class="box-container__box">
+            <img class="box-container__img" src="assets/images/cover_dc_map.png" alt="">
+            <div class="box-container__content">
+              <h4>Nov 2018</h4>
+              <p>Analyzed D.C. house prices and selected features to build the MLR model using Adjusted R-square, AIC, DFBETAs to meet the underlying assumptions</p>
+              <a href="proj_dc_house_price.html" target="_blank" class="btn">See Details</a>
+            </div>
+          </div>
+        </div>
+        <!--project 4-->
+        <div class="box-container__package">
+          <div class="box-container__title">
+            <P><a href="proj_rain_prediction.html" target="_blank">Rainy Weather</a></P>
+          </div>
+          <div class="box-container__box">
+            <img class="box-container__img" src="assets/images/cover_auc.png" alt="">
+            <div class="box-container__content">
+              <h4>Oct 2018</h4>
+              <p>Evaluated multiple machine learning models with Accuracy, Precision and Recall, ROC-AUC for rain vs dry prediction</p>
+              <a href="proj_rain_prediction.html" target="_blank" class="btn">See Details</a>
+            </div>
+          </div>
+        </div>
+        <!--project 5-->
+        <div class="box-container__package">
+          <div class="box-container__title">
+            <P><a href="proj_farmers_market.html" target="_blank">Heart Disease & Farmer's Market</a></P>
+          </div>
+          <div class="box-container__box">
+            <img class="box-container__img" src="assets/images/cover_farmers.png" alt="">
+            <div class="box-container__content">
+              <h4>Aug 2018</h4>
+              <p>Merged two datasets to investigate the relationship between heart disease mortality and farmer's market using fundamental analytical techniques</p>
+              <a href="proj_farmers_market.html" target="_blank" class="btn">See Details</a>
+            </div>
+          </div>
+        </div>
+        <!--project 6-->
+        <div class="box-container__package">
+          <div class="box-container__title">
+            <P><a href="proj_mta_nyc.html" target="_blank">MTA Popularity</a></P>
+          </div>
+          <div class="box-container__box">
+            <img class="box-container__img" src="assets/images/cover_mta.png" alt="">
+            <div class="box-container__content">
+              <h4>July 2018</h4>
+              <p>Utilized geographical libraries to visualize New Youk City MTA Popularity</p>
+              <a href="proj_mta_nyc.html" target="_blank" class="btn">See Details</a>
+            </div>
+          </div>
+        </div>
+        <!--end of project list-->
+      </div>
+    </div>
+  </div>
+
+  <!--skill-->
+  <div id="SkillSet" class="page-section page-section--water" data-matching-link="#skillSet-link">
+    <div class="wrapper">
+      <h2 class="wrapper__title">SKILL SET</h2>
+      <hr class="wrapper__line-section">
+      <div class="split paragraph">
+        <div class="split__column-3">
+          <strong>Data Science</strong>
+          <ul>
+            <li>Python</li>
+            <li>R</li>
+          </ul>
+          <strong>Database</strong>
+          <ul>
+            <li>SQL</li>
+            <li>MongoDB</li>
+          </ul>
+        </div>
+        <div class="split__column-3">
+          <strong>Programming</strong>
+          <ul>
+            <li>Java</li>
+            <li>C++</li>
+          </ul>
+          <strong>Web</strong>
+          <ul>
+            <li>JavaScript</li>
+            <li>Node.js</li>
+          </ul>
+        </div>
+        <div class="split__column-3">
+          <strong>Others</strong>
+          <ul>
+            <li>Git</li>
+            <li>Windows & Linux</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--experience-->
+  <div id="Experience" class="page-section" data-matching-link="#experience-link">
+    <div class="wrapper">
+      <h2 class="wrapper__title">EXPERIENCE</h2>
+      <hr class="wrapper__line-section">
+      <div class="paragraph paragraph__content">
+        <div style="text-align:center">Currently in the USA</div>
+        <br>
+        <strong>Master's Degree</strong> at Arkansas State University
+        <ul>
+          <li>Pursuing a Master's degree in Computer Science with Data Science emphasis (GPA 3.9/4.0)</li>
+          <li>Expected to graduate in May 2019 (but available to work any time remotely until then)</li>
+        </ul>
+        <br>
+
+        <div style="text-align:center">Government Employee Pension Service in South Korea</div>
+        <br>
+        <strong>Assistant Manager</strong> at Management Team
+        <ul>
+          <li>Created and maintained statistical data in Excel and/or the internal database format</li>
+          <li>Planned and executed budget for the branch</li>
+        </ul>
+        <strong>Associate System Administrator</strong> at Financial Investment Division
+        <ul>
+          <li>Operated the financial system of the investment department for funds worth $4 billion</li>
+          <li>Reported the investment performances ranged from bonds, stocks, alternative funds</li>
+          <li>Managed quantitative financial data supplies from companies like Bloomberg</li>
+          <li>Assisted the internal system design team as a liaison with consulting firms such as Deloitte</li>
+        </ul>
+        <strong>Intern</strong> at Management & Administration department
+        <ul>
+          <li>Assisted with maintaining and reporting accounting data</li>
+        </ul>
+        <br>
+
+        <div style="text-align:center">Other experiences</div>
+        <ul>
+          <li>Sergeant in the US Army in South Korea: Managed the administration at the company headquater</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- contact -->
+  <div id="Contact" class="page-section page-section--water" data-matching-link="#contact-link">
+    <div class="wrapper">
+      <h2 class="wrapper__title">CONTACT</h2>
+      <hr class="wrapper__line-section">
+      <div class="split paragraph">
+        <div class="split__column-2 split__column-picture">
+          <img src="assets/images/pic_Kyoosik Kim.jpg">
+        </div>
+        <div class="split__column-2">
+          Currently, I am looking for a team I can make contributions to with my data science skills. While I am interested in finance and economy, I am open to any type of data. Anyone who wants to know more about me is welcome to contact me. Email is the fastest way that you can hear back from me.
+          <ul>
+            <li>Email: <a href="mailto:qshickkim@gmail.com">qshickkim@gmail.com</a></li>
+            <li>LinkedIn
+              <a href="https://www.linkedin.com/in/kyoosik-kim-080b17126/" target="_blank" style="color:black;">
+                <i class="fa fa-linkedin-square" style="font-size:1.65rem;color:lightblue"></i>
+              </a>
+            </li>
+            <li>Github
+              <a href="https://github.com/Q-shick" target="_blank" style="color:black;">
+                <i class="fa fa-github-square" style="font-size:1.65rem;color:lightblue"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- footer -->
+  <footer class="site-footer">
+    <div class="wrapper">
+      <p><span class="site-footer__text">Copyright &copy; Kyoosik Kim 2018 All rights reserved.</span></p>
+    </div>
+  </footer>
+  <script src="/temp/scripts/App.js"></script>
+</body>
+</html>

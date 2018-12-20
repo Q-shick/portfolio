@@ -1,0 +1,16 @@
+.page-section {
+  padding: 2rem 0;
+
+  @mixin atMedium {
+    padding: 4rem 0;
+  }
+
+  &--water {
+    background-color: $water;
+    color: $darkGray;
+  }
+
+  &__project {
+    padding: 6rem 2rem 0 2rem
+  }
+}
