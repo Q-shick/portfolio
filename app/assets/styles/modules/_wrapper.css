@@ -10,6 +10,11 @@
     margin-right: 10%;
   }
 
+  &__nav {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
   &__title {
     position: relative;
     text-align: center;

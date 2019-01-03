@@ -32,17 +32,17 @@
     display: block;
     text-decoration: none;
     color: White;
-    padding-top: 6px;
+    padding-top: 8px;
     font-weight: 150;
-    font-size: 0.75rem;
+    font-size: 0.6rem;
 
     &.is-current-link {
       color: $beeYellow;
     }
 
     @mixin atSmall {
-      padding-top: 8px;
-      font-size: 1rem;
+      padding-top: 14px;
+      font-size: 0.7rem;
     }
 
     @mixin atMedium {
