@@ -259,7 +259,12 @@
 
           </table>
         </div>
-        <p>The chart was numbered with the countries that had at least one cancellation with the assumption that they had borrowed enough number of loans. They are all quite big countries, however, their economic situations were a lot different. The top five cancelling countries shed a light on which data I should focus on. Generally speaking, these countires were in serious economic troubles. Especially, <a href="https://en.wikipedia.org/wiki/Yugoslavia" target="_blank">Yugoslavia</a> folded in the 90s, giving an idea about the Soviet Union. With the hypothesis that countries would cancel loans when economy is bad, the following code extracted the years of loans cancelled by country.</p>
+        <p>The chart was numbered with the countries that had at least one cancellation with the assumption that they had borrowed enough number of loans. They are all quite big countries, however, their economic situations were a lot different. The top five cancelling countries shed a light on which data I should focus on. Generally speaking, these countires were in serious economic troubles. Especially, <a href="https://en.wikipedia.org/wiki/Yugoslavia" target="_blank">Yugoslavia</a> folded in the 90s, giving an idea about the Soviet Union.</p>
+        <div>
+          <a href="https://plot.ly/~qshickkim/11/?share_key=tDN3cwnuk4mirMz4WdpvWx" target="_blank" title="Plot 11" style="display: block; text-align: center;"><img src="https://plot.ly/~qshickkim/11.png?share_key=tDN3cwnuk4mirMz4WdpvWx" alt="Plot 11" style="max-width: 100%;width: 600px;"  width="600" onerror="this.onerror=null;this.src='https://plot.ly/404.png';" /></a>
+          <script data-plotly="qshickkim:11" sharekey-plotly="tDN3cwnuk4mirMz4WdpvWx" src="https://plot.ly/embed.js" async></script>
+        </div>
+        <p>The relationship between economy situation and loan cancellation was confirmed on the map too. With the hypothesis that countries would cancel loans when economy is bad, the following code extracted the years of loans cancelled by country.</p>
         <button class="collapsible">Years of Loans Cancelled</button>
         <div class="paragraph__code">
           <script src="https://gist.github.com/Q-shick/6229c222bebfaf8ab3c1d629550908ca.js"></script>
@@ -501,14 +506,28 @@
           </table>
 
         </div>
-        <p>Its accuracy was 0.96 (+/-0.02) and f1-score was 0.95. This was still impressive, but still worse than Decision Tree. Interestingly enough, Gradient Boosting is considered as a more complicated model than Decision Tree. That is, a sophisticated model isn't always better. Even if Gradient Boosting worked the same, I would have to choose Decision Tree according to Occam's Razor.</p>
+        <p>Its accuracy was 0.96 (+/-0.02) and f1-score was 0.95. This was still impressive, but still worse than Decision Tree. Interestingly enough, Gradient Boosting is considered as a more complicated model than Decision Tree. That is, a sophisticated model isn't always better. Even if Gradient Boosting worked the same, I would have to choose Decision Tree according to Occam's Razor. <a href="https://github.com/Q-shick/fundamentals_of_data_science/blob/master/final_project/ibrd_tree.pdf" target="_blank">Decision Tree Visualization</a> was drawn by the following code.</p>
+        <button class="collapsible">Decision Tree by Graphviz</button>
+        <div class="paragraph__code">
+          <script src="https://gist.github.com/Q-shick/4a910d3fcf3cdf3c1c4113fec221f903.js"></script>
+        </div>
+        <p>Selecting Decision Tree as the final model, the feature importance plot above was helpful to understand which feature made how much contributions. As it turned out, <em>interest rate</em> was the biggest impact followed by <em>loan_type</em>. In fact, the two explained the most of the model, so I tried building another Decision Tree model only with them.</p>
         <img src="assets/images/dt_importance.png">
-        <p>Selecting Decision Tree as the final model, the feature importance plot above was helpful to understand which feature made how much contributions. As it turned out, <em>interest rate</em> was the biggest impact followed by <em>loan_type</em>. In fact, the two explained the most of the model, so I tried building another Decision Tree model only with them. <br>The performance with two major features was still good enough with 0.89 (+/-0.01) accuracy and 0.88 f1-score. However, the difference between the full model and the partial model was what made it perfect or not. Therefore, discovering and processing the rest of 5 features was meaningful for perfection.</p>
+        <p>The performance with two major features was still good enough with 0.89 (+/-0.01) accuracy and 0.88 f1-score. However, the difference between the full model and the partial model was what made it perfect or not. Therefore, discovering and processing the rest of 5 features was meaningful for perfection.</p>
         <hr>
 
         <br>
         <h4>Conclusion</h4>
         <p>The project began with exploring the dataset. Analyzing the features, I could delete many of them since they were clearly unrelated or unavailabe. I applied statistical methods to the 7 candidate features such as Mann-Whitney to see if they were significantly different depending on the class. For modeling, I balanced the classes since there were relatively too many repaid loans.<br>4 different models were tested by cross-validation and evaluated by accuracy and f1-score. Decision Tree performed very well and I chose it for its simplicity. The two features, <em>interest rate</em> and <em>loan type</em>, played the major role for classification. But the rest of features made the model perfect, therefore, the analysis was meaningful and necessary.</p>
+
+        <br>
+        <h4>References</h4>
+        <ul>
+          <li>Data Source: <a href="https://datacatalog.worldbank.org/dataset/ibrd-statement-loans-historical-data" target="_blank">The World Bank</a>, <a href="https://dev.socrata.com/foundry/finances.worldbank.org/x433-52wt" target="_blank">Socrata</a></li>
+          <li>Statistics: <a href="https://machinelearningmastery.com/nonparametric-statistical-significance-tests-in-python/" target="_blank">Mann-Whitney</a></li>
+          <li>Modeling: <a href="https://elitedatascience.com/imbalanced-classes" target="_blank">Handling Imbalanced Data</a>, <a href="https://www.analyticsvidhya.com/blog/2016/02/7-important-model-evaluation-error-metrics" target="_blank">Error Metrics</a></li>
+          <li>Finance: <a href="https://www.adb.org/site/cofinancing/what-is-cofinancing" target="_blank">Co-financing</a>, <a href="https://www.ifcmarkets.com/en/introduction/floating-fixed-spread" target="_blank">Spread</a></li>
+        </ul>
       </div>
     </div>
 
